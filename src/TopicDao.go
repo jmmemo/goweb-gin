@@ -20,10 +20,19 @@ func GetTopicDetail(c *gin.Context) {
 	c.JSON(200, Create(101, "帖子标题"))
 }
 func NewTopic(c *gin.Context) {
-	c.String(200, "新增帖子")
+	//判断登录
+	//c.String(200, "新增帖子")
+	topic := Topic{}
+	err := c.BindJSON(&topic)
+	if err != nil {
+		c.String(400, "参数错误%v", err)
+	} else {
+		c.JSON(200, topic)
+	}
 }
 
 func DelTopic(c *gin.Context) {
+	//判断登录
 	c.String(200, "删除帖子")
 }
 func GetTopicList(c *gin.Context) {
